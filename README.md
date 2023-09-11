@@ -31,3 +31,40 @@ def random_color():
 # 使用列表推导式为每一个省份生成一个随机颜色，结果保存在color_series列表中
 color_series = [random_color() for _ in range(len(provinces))]
 ```
+
+### 使用数据创建一个DataFrame
+```
+df = pd.DataFrame({'provinces': provinces, 'num': num})
+# 根据'num'列的值进行降序排序
+df.sort_values(by='num', ascending=False, inplace=True)
+# 提取数据列表
+v = df['provinces'].values.tolist()
+d = df['num'].values.tolist()
+```
+### 设置图表相关信息
+```
+# 创建Pie图表实例
+pie1 = Pie(init_opts=opts.InitOpts(width='1350px', height='750px'))
+# 设置颜色序列
+pie1.set_colors(color_series)
+# 向饼图中添加数据，并设置相关参数如半径、中心、南丁格尔图类型等
+pie1.add("", [list(z) for z in zip(v, d)],
+         radius=["30%", "135%"],
+         center=["50%", "65%"],
+         rosetype="area"
+         )
+# 设置全局配置，如标题、图例和工具箱
+pie1.set_global_opts(title_opts=opts.TitleOpts(title='玫瑰图示例'),
+                     legend_opts=opts.LegendOpts(is_show=False),
+                     toolbox_opts=opts.ToolboxOpts())
+# 设置系列配置，如标签显示方式等
+pie1.set_series_opts(label_opts=opts.LabelOpts(is_show=True, position="inside", font_size=12,
+                                               formatter="{b}:{c}天", font_style="italic",
+                                               font_weight="bold", font_family="Microsoft YaHei"
+                                               ),
+                     )
+```
+### 生成相对应的图形
+```
+pie1.render('南丁格尔玫瑰图.html')
+```
