@@ -1,4 +1,4 @@
-# Python-NanDingGeEr
+# Python-Nightingale Rose Chart（Polar Area Chart）
 用Python画可视的个省份新冠疫情人数未新增的天数的南丁格尔图，数据可视化，数据分析
 
 ### 导入相应的库
